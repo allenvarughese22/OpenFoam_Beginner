@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   0.1;
+
+vertices
+(
+    (0 0 0)   //bottom  orgin                 0
+    (1 0 0)   //bottom right                  1
+    (1 1 0)  //bottom diagonal opposite	      2 
+    (0 1 0)	//bottom y positive           3
+    (0 0 0.1)	//top orgin                   4
+    (1 0 0.1)	//top right                   5
+    (1 1 0.1)	// top diagonal opposite      6 
+    (0 1 0.1)	//top y1                      7
+
+    // new vertices
+    (2 0 0)   //bottom right                  8
+    (2 1 0)  //bottom diagonal opposite	      9 
+    (2 0 0.1)	//top right                   10
+    (2 1 0.1)	// top diagonal opposite      11
+
+
+
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7)    (20 20 1) simpleGrading (0.2 5 1)      //first blok
+    hex (1 8 9 2 5 10 11 6)  (20 20 1) simpleGrading (5 5 1)      //second block
+);
+
+edges
+(
+);
+
+boundary
+(
+        
+    zeroGradient_plane
+    {
+        type patch;
+        faces
+        (
+            (3 7 6 2)  // this is x = 0 to x=1 top y plane 
+            (2 6 11 9) // this is x = 1 to x=2 top y blane
+            (8 9 11 10)   //right side outlet x=2 plane . in ong video it is said left side 
+            (1 5 4 0) //bottom x = 0 to x=1 bottom y plane left side
+        );
+    }
+
+    inlet   
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+    plate 
+    {
+        type wall;
+        faces
+        (
+            (1 8 10 5)
+        );
+    }
+
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1) // z = 0 plane first block
+            (4 5 6 7)  // z = 0.1 plane first block
+            (1 2 9 8 ) // z = 0 plane second block
+	    (5 10 11 6)  // z = 0.1 plane second block
+
+	 );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

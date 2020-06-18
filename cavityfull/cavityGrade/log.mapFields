@@ -1,0 +1,41 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1906                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : v1906 OPENFOAM=1906
+Arch   : "LSB;label=32;scalar=64"
+Exec   : mapFields cavityFine -case cavityGrade -sourceTime latestTime -consistent
+Date   : Jun 13 2020
+Time   : 12:39:03
+Host   : LAPTOP-ODVE2UUP
+PID    : 9318
+I/O    : uncollated
+Case   : /home/allen/backup_tutorial/cavityfull/cavityGrade
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Source: "/home/allen/backup_tutorial/cavityfull" "cavityFine"
+Target: "/home/allen/backup_tutorial/cavityfull" "cavityGrade"
+
+Create databases as time
+
+Source time: 0.7
+Target time: 0.5
+Create meshes
+
+Source mesh size: 1681	Target mesh size: 400
+
+
+Consistently creating and mapping fields for time 0.7
+
+    interpolating p
+    interpolating U
+
+End
+

@@ -1,0 +1,4 @@
+blockMesh
+icoFoam  > log &
+cat log
+touch lowviscocity_ext_flat.foam
